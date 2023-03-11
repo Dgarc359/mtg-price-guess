@@ -1,0 +1,29 @@
+{
+  "name": "mtg-guessing-game",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "module": "esnext",
+  "scripts": {
+    "dev": "yarn dev:fe && yarn dev:be",
+    "dev:be": "echo 'no be dev available yet but will be sst dev'",
+    "dev:fe": "cd frontend && yarn dev",
+    "build": "sst build",
+    "predeploy": "cd frontend && yarn build",
+    "deploy": "sst deploy",
+    "remove": "sst remove",
+    "console": "sst console",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "sst": "2.1.24",
+    "aws-cdk-lib": "2.62.2",
+    "constructs": "10.1.156",
+    "typescript": "^4.9.5",
+    "@tsconfig/node16": "^1.0.3"
+  },
+  "workspaces": [
+    "packages/*",
+    "frontend"
+  ]
+}
