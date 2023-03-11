@@ -18,13 +18,13 @@ export function services({ stack, app }: StackContext) {
   //   },
   // });
 
-  const rootDomain = "nameofthemist.com";
-  const subDomain = "mtg";
-  const hz = HostedZone.fromLookup(
-    stack,
-    app.logicalPrefixedName('hosted-zone'),
-    { domainName: rootDomain }
-  );
+  // const rootDomain = "nameofthemist.com";
+  // const subDomain = "mtg";
+  // const hz = HostedZone.fromLookup(
+  //   stack,
+  //   app.logicalPrefixedName('hosted-zone'),
+  //   { domainName: rootDomain }
+  // );
   
   // const frontendBucket = new Bucket(
   //   stack,
@@ -36,14 +36,14 @@ export function services({ stack, app }: StackContext) {
   //   }
   // )
 
-  const certificate = new Certificate(stack, app.logicalPrefixedName('certificate'), {
-    domainName: `${subDomain}.${rootDomain}`,
-    certificateName: app.logicalPrefixedName('certificate')
+  // const certificate = new Certificate(stack, app.logicalPrefixedName('certificate'), {
+  //   domainName: `${subDomain}.${rootDomain}`,
+  //   certificateName: app.logicalPrefixedName('certificate')
     
-    // hostedZone: hz,
-    // region: "us-east-1",
-    // subjectAlternativeNames: ["bar.domain.com"],
-  });
+  //   // hostedZone: hz,
+  //   // region: "us-east-1",
+  //   // subjectAlternativeNames: ["bar.domain.com"],
+  // });
   
 
   const frontendBucket = new BucketDeployment(
@@ -57,6 +57,8 @@ export function services({ stack, app }: StackContext) {
         {
           autoDeleteObjects: true,
           removalPolicy: RemovalPolicy.DESTROY,
+          bucketName: app.logicalPrefixedName('frontend-bucket-deployment'),
+          publicReadAccess: true,
         }
       )
     }
@@ -69,9 +71,9 @@ export function services({ stack, app }: StackContext) {
     {
       path: "frontend",
       customDomain: {
-        domainName: `${subDomain}.${rootDomain}`,
-        // domainAlias: `www.${rootDomain}`,
-        hostedZone: hz.zoneName
+        domainName: `nameofthemist.com`,
+        domainAlias: `www.nameofthemist.com`,
+        hostedZone: `nameofthemist.com`
       },
       cdk: {
         bucket: frontendBucket.deployedBucket
@@ -83,6 +85,6 @@ export function services({ stack, app }: StackContext) {
 
 
   stack.addOutputs({
-    site: rootDomain,
+    siteUrl: site.url!,
   });
 }

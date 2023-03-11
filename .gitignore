@@ -1,6 +1,7 @@
 # dependencies
 node_modules
 
+.sst.config.**
 # sst
 .sst
 .build

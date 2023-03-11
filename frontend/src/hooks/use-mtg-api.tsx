@@ -10,8 +10,6 @@ export const useMtgApi = () => {
     Axios.get("https://api.scryfall.com/cards/random")
       .then((res) => setResponse(res.data))
       .catch(err => alert(err))
-
-    // console.log('response', response);
   }, []);
 
   return [response, setResponse] as const
