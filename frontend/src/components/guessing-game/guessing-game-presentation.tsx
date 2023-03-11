@@ -1,4 +1,5 @@
 import { Card } from "../../lib/types";
+import { cn } from "../../lib/utils";
 import { CardView } from "../card/card-presentation";
 
 interface Props {
@@ -18,10 +19,22 @@ export const GuessingGamePresentation =  (props: Props) => {
   } = props;
   
   return (<>
-      <div id="main-container" className="flex">
-        <CardView card={firstCard} />
-        <div className="w-2 h-screen bg-black"></div>
-        <CardView card={secondCard}/>
+      <div id="main-container" className={
+          cn([
+            "max-sm:block",
+            "max-lg:flex",
+            "lg:flex",
+          ])
+        }
+      >
+        <CardView cardData={firstCard} />
+        <div className={
+          cn([
+            "max-sm:bg-red-500 max-sm:invisible",
+            "md:w-2 md:h-screen md:bg-black",
+          ])
+        }/>
+        <CardView cardData={secondCard} />
       </div>
     </>)
 }

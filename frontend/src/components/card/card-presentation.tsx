@@ -1,25 +1,38 @@
 import { Card } from "../../lib/types";
+import { cn } from "../../lib/utils";
 
 interface ICard {
-  card: Card | undefined
+  cardData: Card | undefined
 }
 
 export const CardView = (props: ICard) => {
   return (
     <div
       id="card-container"
-      className={` w-1/2 h-screen flex justify-center align-middle my-8`}
+      className={
+        cn([
+          "sm:w-full sm:h-1/2",
+          'md:w-1/2 md:h-screen md:flex md:justify-center md:align-middle md:8'
+        ])
+      }
     >
-      <img src={props.card?.image_uris?.art_crop} alt="" className="blur-3xl" />
+      <img src={props.cardData?.image_uris?.art_crop} alt="" className="blur-3xl" />
       <div className="absolute">
         <img
-          src={props.card?.image_uris?.png}
+          id="image"
+          src={props.cardData?.image_uris?.png}
           alt=""
-          className=" w-1/4 h-1/2 hover:cursor-pointer m-auto"
+          className={
+            cn([
+              "hover:cursor",
+              "max-sm:w-2/6",
+              "md:w-1/4 md:h-1/2 md:m-auto"
+            ])
+          }
         />
         <div className="w-1/4 text-center m-auto mt-8">
-          <div className="text-center text-3xl">{props.card?.name}</div>
-          <div className="text-center">{props.card?.oracle_text}</div>
+          <div id="card-name" className="text-center text-3xl">{props.cardData?.name}</div>
+          <div id="card-action" className="text-center">{props.cardData?.oracle_text}</div>
         </div>
       </div>
     </div>
