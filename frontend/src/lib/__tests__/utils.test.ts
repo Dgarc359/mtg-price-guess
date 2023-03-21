@@ -1,4 +1,5 @@
-import {cn} from './utils';
+import type * as classNames from '../utils';
+const {cn} = jest.requireActual<typeof classNames>('../utils');
 
 describe('utils test suite', () => {
   it('test className utility function', () => {

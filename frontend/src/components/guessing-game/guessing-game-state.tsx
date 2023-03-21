@@ -8,26 +8,40 @@ import { GuessingGamePresentation } from "./guessing-game-presentation"
  * @returns 
  */
 export const GuessingGameState = () => {
-  const [firstCard, setFirstCard] = useMtgApi();
-  const [secondCard, setSecondCard] = useMtgApi();
+  
   const [winningCard, setWinningCard] = React.useState<Card | undefined>();
   const [playerPick, setPlayerPick] = React.useState<string>();
   const [modalVisibility, setModalVisible] = React.useState<boolean>(false);
-  const [refreshCards, setRefreshCards] = React.useState<boolean>(false);
 
-  const modalOnClick = () => {
+  const [refreshCards, setRefreshCards] = React.useState<boolean>(false);
+  const [refreshFirstCard, setRefreshFirstCard] = React.useState<boolean>(false);
+  const [refreshSecondCard, setRefreshSecondCard] = React.useState<boolean>(false);
+
+
+  const [firstCard, setFirstCard] = useMtgApi([refreshCards, refreshFirstCard]);
+  const [secondCard, setSecondCard] = useMtgApi([refreshCards, refreshSecondCard]);
+
+  const [playerStreak, setPlayerStreak] = React.useState<number>(0);
+
+  const modalOnClick = (isCorrect: boolean) => {
     setModalVisible(false);
-    setRefreshCards(true);
+    setRefreshCards((state) => !state)
+    if(isCorrect) setPlayerStreak((state) => state += 1);
+    else setPlayerStreak(0);
   }
 
+  // React.useEffect(() => {
+    
+  // }, []);
+
   React.useEffect(() => {
+    [{state: firstCard, refresh: setRefreshFirstCard}, {state: secondCard, refresh: setRefreshSecondCard}].forEach((card) => {
+      if(!card.state?.prices.usd) card.refresh((state) => !state);
+      // console.log(`card prices is ${card.state?.prices.usd} which is null: ${card.state?.prices.usd ? false : true}`)
+    })
     setWinningCard(Number(firstCard?.prices.usd) > Number(secondCard?.prices.usd) ? firstCard : secondCard)
   }, [firstCard, secondCard]);
 
-  React.useEffect(() => {
-    // setFirstCard(useMtgApi()[0]);
-    // setSecondCard(useMtgApi()[0]);
-  }, [refreshCards]);
 
   const onPlayerChoiceClick = (e: any) => {
     console.log("player choice", e.currentTarget.id, "winning card", winningCard?.name);
@@ -43,5 +57,6 @@ export const GuessingGameState = () => {
     onModalCloseClick={modalOnClick}
     playerChoice={playerPick}
     winningCard={winningCard}
+    playerStreak={playerStreak}
     />)
 }

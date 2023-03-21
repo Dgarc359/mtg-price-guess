@@ -6,7 +6,11 @@ export type Card = {
   },
   oracle_text: string,
   prices: {
-    usd: string,
+    usd: string | null,
     usdFoil: string | null
-  }
+  },
+  legalities: {
+    modern: "legal" | "not_legal"
+  },
+  set_name: string,
 }

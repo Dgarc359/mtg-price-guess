@@ -6,7 +6,7 @@ import { MainView } from './views/main-view'
 function App() {
 
   return (
-    <div id="App">
+    <div id="App" className='bg-blue-100 w-full h-full'>
       {/* <div className={"w-screen h-screen bg-blue-200"}></div> */}
       <MainView />
     </div>
