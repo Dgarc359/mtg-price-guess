@@ -59,9 +59,23 @@ export const ResultsModal = (props: IResultsModal): JSX.Element => {
                 </Grid>
                 <Grid item xs={12} >
                 <Typography>
-                    {playerWon ? "You won!" : "You lost!"}
+                    {(playerWon ? "You won!" : "You lost!") + ` You chose: ${playerChoice}`}
                 </Typography>
                 </Grid>
+                <Grid item xs={12}>
+                    <Typography>
+                        {`${firstCard?.name} price: $${firstCard?.prices.usd}`}
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography>
+                        {`${secondCard?.name} price: $${secondCard?.prices.usd}`}
+                    </Typography>
+                </Grid>
+
+                {/* <p>{`You chose ${playerChoice}. Which is ${playerChoice === winningCard?.name ? "Correct!!" : "Incorrect!!"}`}</p>
+            <p>{`${firstCard?.name} price: $${firstCard?.prices.usd}`}</p>
+            <p>{`${secondCard?.name} price: $${secondCard?.prices.usd}`}</p> */}
             </Grid>
         </Paper>
         // <div id={id}
