@@ -55,20 +55,35 @@ export const ResultsModal = (props: IResultsModal): JSX.Element => {
             <Grid container spacing={2}>
                 <Grid item xs={11}/>
                 <Grid item xs={1}>
-                    <span onClick={() => onModalCloseClick(playerWon)} className="cursor-pointer">&times;</span>
+                    <Typography
+                        onClick={() => onModalCloseClick(playerWon)}
+                        sx={{
+                            cursor: "pointer",
+                        }}
+                        variant="h4"
+                    >
+                        &times;
+                    </Typography>
                 </Grid>
+                <Grid item xs={12}/>
                 <Grid item xs={12} >
-                <Typography>
-                    {(playerWon ? "You won!" : "You lost!") + ` You chose: ${playerChoice}`}
+                <Typography variant="h2" sx={{textAlign: "center"}} >
+                    {(playerWon ? "You won!" : "You lost!")}
+                </Typography>
+                
+                </Grid>
+                <Grid item xs={12} sx={{textAlign: "center"}}>
+                <Typography variant="body1">
+                    {` You chose: ${playerChoice}`}
                 </Typography>
                 </Grid>
-                <Grid item xs={12}>
-                    <Typography>
+                <Grid item xs={12} sx={{textAlign: "center"}}>
+                    <Typography variant="body1">
                         {`${firstCard?.name} price: $${firstCard?.prices.usd}`}
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography>
+                    <Typography variant="body1" sx={{textAlign: "center"}}>
                         {`${secondCard?.name} price: $${secondCard?.prices.usd}`}
                     </Typography>
                 </Grid>

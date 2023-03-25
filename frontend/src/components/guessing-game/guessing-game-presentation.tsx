@@ -2,6 +2,7 @@ import { Card } from "../../lib/types";
 import { cn } from "../../lib/utils";
 import { CardView } from "../card/card-presentation";
 import { ResultsModal } from "../results-modal";
+import {Typography} from '@mui/material';
 
 interface Props {
   firstCard: Card | undefined
@@ -35,7 +36,6 @@ export const GuessingGamePresentation = (props: Props) => {
     <>
       <div id="main-container" className={
         cn([
-          // "bg-gray-400",
           "max-sm:block max-sm:pt-10",
           "max-lg:flex lg:flex",
         ])
@@ -47,25 +47,21 @@ export const GuessingGamePresentation = (props: Props) => {
           "sm:flex-row",
           "md:flex md:justify-evenly w-full"
         ])}>
-          <CardView cardData={firstCard} imageOnClick={onPlayerChoiceClick} />
-          {/* <div className={
-            cn([
-              "max-sm:bg-red-500 max-sm:invisible",
-              "md:w-2 md:h-screen md:bg-black",
-            ])
-          }/> */}
-          {/* <div id="divider" className={cn(["w-1/3 h-full"])}></div> */}
+          <CardView cardData={firstCard} imageOnClick={onPlayerChoiceClick} onClickDisabled={!modalVisible}/>
           <div
             className={cn([
               "flex", "md:flex-col",
               "py-4 m-4 px-4",
-              // "max-sm:px-4 max-sm:py-4 max-sm:m-4"
             ])}
           >
-            <div className={cn(["max-sm:pr-4"])}>Current Streak</div>
-            <div className={cn(["md:text-center"])}>{playerStreak}</div>
+            <Typography variant="h4" sx={{textAlign:"center"}}>
+              Current Streak
+            </Typography>
+            <Typography variant="h4" sx={{textAlign: "center"}}>
+              {playerStreak}
+            </Typography>
           </div>
-          <CardView cardData={secondCard} imageOnClick={onPlayerChoiceClick} />
+          <CardView cardData={secondCard} imageOnClick={onPlayerChoiceClick} onClickDisabled={!modalVisible} />
         </div>
       </div>
 
