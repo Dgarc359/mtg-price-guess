@@ -3,6 +3,7 @@ import { cn } from "../../lib/utils";
 import { CardView } from "../card/card-presentation";
 import { ResultsModal } from "../results-modal";
 import {Typography} from '@mui/material';
+import { LoadingCard } from "../card/loading-card-presentation";
 
 interface Props {
   firstCard: Card | undefined
@@ -13,6 +14,7 @@ interface Props {
   playerChoice: string | undefined
   winningCard: Card | undefined
   playerStreak: number
+  timePassed: boolean
 }
 
 /**
@@ -30,6 +32,7 @@ export const GuessingGamePresentation = (props: Props) => {
     playerChoice,
     winningCard,
     playerStreak,
+    timePassed,
   } = props;
 
   return (
@@ -47,21 +50,26 @@ export const GuessingGamePresentation = (props: Props) => {
           "sm:flex-row",
           "md:flex md:justify-evenly w-full"
         ])}>
-          <CardView cardData={firstCard} imageOnClick={onPlayerChoiceClick} onClickDisabled={!modalVisible}/>
+            <CardView cardData={firstCard} imageOnClick={onPlayerChoiceClick} onClickDisabled={!modalVisible} timePassed={timePassed}/>
           <div
             className={cn([
-              "flex", "md:flex-col",
+              "flex", "flex-col",
               "py-4 m-4 px-4",
             ])}
           >
-            <Typography variant="h4" sx={{textAlign:"center"}}>
+            <Typography variant="h4" sx={{
+              textAlign:"center", 
+              paddingRight: {
+                // sm: "1rem",
+              }
+            }}>
               Current Streak
             </Typography>
             <Typography variant="h4" sx={{textAlign: "center"}}>
               {playerStreak}
             </Typography>
           </div>
-          <CardView cardData={secondCard} imageOnClick={onPlayerChoiceClick} onClickDisabled={!modalVisible} />
+          <CardView cardData={secondCard} imageOnClick={onPlayerChoiceClick} onClickDisabled={!modalVisible} timePassed={timePassed}/>
         </div>
       </div>
 

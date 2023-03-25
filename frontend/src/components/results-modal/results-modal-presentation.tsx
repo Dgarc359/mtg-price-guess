@@ -29,11 +29,14 @@ export const ResultsModal = (props: IResultsModal): JSX.Element => {
     return (
         <Paper
             sx={{
-                p: 2,
+                p: {
+                  sm: 0,
+                  md: 2,
+                },
                 margin: "auto",
                 backgroundColor: "#fff",
                 width: {
-                    sm: 500,
+                    sm: 350,
                     md: 600
                 },
                 height: {
@@ -44,7 +47,10 @@ export const ResultsModal = (props: IResultsModal): JSX.Element => {
                 zIndex: 1,
                 top: "2.5rem",
                 overflow: "auto",
-                left: "30%",
+                left : {
+                  sm: "0%",
+                  md: "30%"
+                },
                 visibility: visible ? "visible" : "hidden"
             }}
             elevation={3}
