@@ -1,6 +1,7 @@
 import { Card } from "../../lib/types";
 import { cn } from "../../lib/utils";
 import { CardView } from "../card/card-presentation";
+import { ResultsModal } from "../results-modal";
 
 interface Props {
   firstCard: Card | undefined
@@ -65,18 +66,15 @@ export const GuessingGamePresentation =  (props: Props) => {
         <CardView cardData={secondCard} imageOnClick={onPlayerChoiceClick}/>
       </div>
       </div>
-      <div id="modal" className={
-          cn([
-            modalVisible ? "" : "invisible",
-            "fixed z-1 top-10 w-1/3 h-1/3 overflow-auto bg-white left-1/3",
-          ])
-        }>
-          <div>
-            <span onClick={() => onModalCloseClick(playerChoice === winningCard?.name)} className="cursor-pointer">&times;</span>
-            <p>{`You chose ${playerChoice}. Which is ${playerChoice === winningCard?.name ? "Correct!!" : "Incorrect!!"}`}</p>
-            <p>{`${firstCard?.name} price: $${firstCard?.prices.usd}`}</p>
-            <p>{`${secondCard?.name} price: $${secondCard?.prices.usd}`}</p>
-          </div>
-        </div>
+
+      <ResultsModal 
+        id="results-modal"
+        visible={modalVisible}
+        onModalCloseClick={onModalCloseClick}
+        playerChoice={playerChoice}
+        winningCard={winningCard}
+        firstCard={firstCard}
+        secondCard={secondCard}
+      />
     </>)
 }

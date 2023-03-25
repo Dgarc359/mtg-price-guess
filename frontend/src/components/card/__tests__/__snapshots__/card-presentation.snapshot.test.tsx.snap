@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`snapshot test for card presentation tests snapshot 1`] = `
+exports[`tests snapshot 1`] = `
 <div
   className="p-4 m-4"
   id="card-container"
@@ -94,7 +94,7 @@ exports[`snapshot test for card presentation tests snapshot 1`] = `
           <style
             dangerouslySetInnerHTML={
               {
-                "__html": ".css-1o4v5k-MuiTypography-root{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1.5rem;line-height:1.334;letter-spacing:0em;margin-bottom:0.35em;}@media (min-width:600px){.css-1o4v5k-MuiTypography-root{text-align:left;}}@media (min-width:900px){.css-1o4v5k-MuiTypography-root{text-align:center;}}",
+                "__html": ".css-1o4v5k-MuiTypography-root{margin:0;font-family:\\"Roboto\\",\\"Helvetica\\",\\"Arial\\",sans-serif;font-weight:400;font-size:1.5rem;line-height:1.334;letter-spacing:0em;margin-bottom:0.35em;}@media (min-width:600px){.css-1o4v5k-MuiTypography-root{text-align:left;}}@media (min-width:900px){.css-1o4v5k-MuiTypography-root{text-align:center;}}",
               }
             }
             data-emotion="css 1o4v5k-MuiTypography-root"
@@ -107,7 +107,7 @@ exports[`snapshot test for card presentation tests snapshot 1`] = `
           <style
             dangerouslySetInnerHTML={
               {
-                "__html": ".css-264ae3-MuiTypography-root{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:0.875rem;line-height:1.43;letter-spacing:0.01071em;color:rgba(0, 0, 0, 0.6);overflow:hidden;white-space:nowrap;}@media (min-width:600px){.css-264ae3-MuiTypography-root{text-align:left;}}@media (min-width:900px){.css-264ae3-MuiTypography-root{text-align:center;}}",
+                "__html": ".css-264ae3-MuiTypography-root{margin:0;font-family:\\"Roboto\\",\\"Helvetica\\",\\"Arial\\",sans-serif;font-weight:400;font-size:0.875rem;line-height:1.43;letter-spacing:0.01071em;color:rgba(0, 0, 0, 0.6);overflow:hidden;white-space:nowrap;}@media (min-width:600px){.css-264ae3-MuiTypography-root{text-align:left;}}@media (min-width:900px){.css-264ae3-MuiTypography-root{text-align:center;}}",
               }
             }
             data-emotion="css 264ae3-MuiTypography-root"
@@ -120,7 +120,7 @@ exports[`snapshot test for card presentation tests snapshot 1`] = `
           <style
             dangerouslySetInnerHTML={
               {
-                "__html": ".css-1dsvagk-MuiTypography-root{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:0.875rem;line-height:1.43;letter-spacing:0.01071em;color:rgba(0, 0, 0, 0.6);}@media (min-width:600px){.css-1dsvagk-MuiTypography-root{text-align:left;}}@media (min-width:900px){.css-1dsvagk-MuiTypography-root{text-align:center;}}",
+                "__html": ".css-1dsvagk-MuiTypography-root{margin:0;font-family:\\"Roboto\\",\\"Helvetica\\",\\"Arial\\",sans-serif;font-weight:400;font-size:0.875rem;line-height:1.43;letter-spacing:0.01071em;color:rgba(0, 0, 0, 0.6);}@media (min-width:600px){.css-1dsvagk-MuiTypography-root{text-align:left;}}@media (min-width:900px){.css-1dsvagk-MuiTypography-root{text-align:center;}}",
               }
             }
             data-emotion="css 1dsvagk-MuiTypography-root"
