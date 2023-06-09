@@ -1,6 +1,9 @@
 import { Card } from "../../lib/types";
 import { cn } from "../../lib/utils";
 import { CardView } from "../card/card-presentation";
+import { ResultsModal } from "../results-modal";
+import {Typography} from '@mui/material';
+import { LoadingCard } from "../card/loading-card-presentation";
 
 interface Props {
   firstCard: Card | undefined
@@ -11,6 +14,7 @@ interface Props {
   playerChoice: string | undefined
   winningCard: Card | undefined
   playerStreak: number
+  timePassed: boolean
 }
 
 /**
@@ -18,9 +22,9 @@ interface Props {
  * @param props
  * @returns 
  */
-export const GuessingGamePresentation =  (props: Props) => {
+export const GuessingGamePresentation = (props: Props) => {
   const {
-    firstCard, 
+    firstCard,
     secondCard,
     onPlayerChoiceClick,
     modalVisible,
@@ -28,55 +32,55 @@ export const GuessingGamePresentation =  (props: Props) => {
     playerChoice,
     winningCard,
     playerStreak,
+    timePassed,
   } = props;
-  
-  return (<>
+
+  return (
+    <>
       <div id="main-container" className={
-          cn([
-            // "bg-gray-400",
-            "max-sm:block max-sm:pt-10",
-            "max-lg:flex lg:flex",
-          ])
-        }
+        cn([
+          "max-sm:block max-sm:pt-10",
+          "max-lg:flex lg:flex",
+        ])
+      }
       >
-      <div className={cn([
-        // "flex justify-evenly w-full"
-        "sm:flex-row",
-        "md:flex md:justify-evenly w-full"
-      ])}>
-        <CardView cardData={firstCard} imageOnClick={onPlayerChoiceClick} />
-        {/* <div className={
-          cn([
-            "max-sm:bg-red-500 max-sm:invisible",
-            "md:w-2 md:h-screen md:bg-black",
-          ])
-        }/> */}
-        {/* <div id="divider" className={cn(["w-1/3 h-full"])}></div> */}
-        <div
-          className={cn([
-            "flex", "md:flex-col",
-            "py-4 m-4 px-4",
-            // "max-sm:px-4 max-sm:py-4 max-sm:m-4"
-          ])}
-        >
-          <div className={cn(["max-sm:pr-4"])}>Current Streak</div>
-          <div className={cn(["md:text-center"])}>{playerStreak}</div>
-        </div>
-        <CardView cardData={secondCard} imageOnClick={onPlayerChoiceClick}/>
-      </div>
-      </div>
-      <div id="modal" className={
-          cn([
-            modalVisible ? "" : "invisible",
-            "fixed z-1 top-10 w-1/3 h-1/3 overflow-auto bg-white left-1/3",
-          ])
-        }>
-          <div>
-            <span onClick={() => onModalCloseClick(playerChoice === winningCard?.name)} className="cursor-pointer">&times;</span>
-            <p>{`You chose ${playerChoice}. Which is ${playerChoice === winningCard?.name ? "Correct!!" : "Incorrect!!"}`}</p>
-            <p>{`${firstCard?.name} price: $${firstCard?.prices.usd}`}</p>
-            <p>{`${secondCard?.name} price: $${secondCard?.prices.usd}`}</p>
+        <div className={cn([
+          // "flex justify-evenly w-full"
+          modalVisible ? "blur-md" : "",
+          "sm:flex-row",
+          "md:flex md:justify-evenly w-full"
+        ])}>
+            <CardView cardData={firstCard} imageOnClick={onPlayerChoiceClick} onClickDisabled={!modalVisible} timePassed={timePassed}/>
+          <div
+            className={cn([
+              "flex", "flex-col",
+              "py-4 m-4 px-4",
+            ])}
+          >
+            <Typography variant="h4" sx={{
+              textAlign:"center", 
+              paddingRight: {
+                // sm: "1rem",
+              }
+            }}>
+              Current Streak
+            </Typography>
+            <Typography variant="h4" sx={{textAlign: "center"}}>
+              {playerStreak}
+            </Typography>
           </div>
+          <CardView cardData={secondCard} imageOnClick={onPlayerChoiceClick} onClickDisabled={!modalVisible} timePassed={timePassed}/>
         </div>
+      </div>
+
+      <ResultsModal
+        id="results-modal"
+        visible={modalVisible}
+        onModalCloseClick={onModalCloseClick}
+        playerChoice={playerChoice}
+        winningCard={winningCard}
+        firstCard={firstCard}
+        secondCard={secondCard}
+      />
     </>)
 }

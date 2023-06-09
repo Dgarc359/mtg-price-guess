@@ -21,24 +21,31 @@ export const GuessingGameState = () => {
   const [firstCard, setFirstCard] = useMtgApi([refreshCards, refreshFirstCard]);
   const [secondCard, setSecondCard] = useMtgApi([refreshCards, refreshSecondCard]);
 
+  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const [timePassed, setTimePassed] = React.useState<boolean>(false);
+
+  const waitAndSetTimePassed = async () => {
+    setTimePassed(false);
+    await wait(1500);
+    setTimePassed(true);
+  };
+
   const [playerStreak, setPlayerStreak] = React.useState<number>(0);
 
   const modalOnClick = (isCorrect: boolean) => {
     setModalVisible(false);
+    // waitAndSetTimePassed();
     setRefreshCards((state) => !state)
     if(isCorrect) setPlayerStreak((state) => state += 1);
     else setPlayerStreak(0);
   }
 
-  // React.useEffect(() => {
-    
-  // }, []);
-
   React.useEffect(() => {
     [{state: firstCard, refresh: setRefreshFirstCard}, {state: secondCard, refresh: setRefreshSecondCard}].forEach((card) => {
       if(!card.state?.prices.usd) card.refresh((state) => !state);
-      // console.log(`card prices is ${card.state?.prices.usd} which is null: ${card.state?.prices.usd ? false : true}`)
     })
+    waitAndSetTimePassed();
     setWinningCard(Number(firstCard?.prices.usd) > Number(secondCard?.prices.usd) ? firstCard : secondCard)
   }, [firstCard, secondCard]);
 
@@ -58,5 +65,6 @@ export const GuessingGameState = () => {
     playerChoice={playerPick}
     winningCard={winningCard}
     playerStreak={playerStreak}
+    timePassed={timePassed}
     />)
 }

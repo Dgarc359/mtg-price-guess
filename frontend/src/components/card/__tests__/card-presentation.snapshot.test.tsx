@@ -4,9 +4,9 @@
 import * as renderer from 'react-test-renderer';
 import {CardView} from '../card-presentation';
 import { Card } from '../../../lib/types';
+import {test, expect} from 'vitest';
 
-describe("snapshot test for card presentation", () => {
-    it("tests snapshot", () => {
+    test("tests snapshot", () => {
         const cardData: Card = {
             name: "test card",
             image_uris: {
@@ -29,4 +29,3 @@ describe("snapshot test for card presentation", () => {
             .toJSON();
         expect(card).toMatchSnapshot();
     })
-})
