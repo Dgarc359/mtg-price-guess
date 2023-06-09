@@ -1,4 +1,4 @@
-import { aws_route53_targets ,aws_ec2, RemovalPolicy } from "aws-cdk-lib";
+import { aws_route53_targets ,aws_ec2, RemovalPolicy, aws_route53 } from "aws-cdk-lib";
 import { ARecord, HostedZone } from "aws-cdk-lib/aws-route53";
 // import { Route53RecordTarget } from "aws-cdk-lib/aws-route53-targets";
 import { Bucket } from "aws-cdk-lib/aws-s3";
@@ -6,7 +6,7 @@ import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import { StackContext, Api, StaticSite } from "sst/constructs";
 import * as path from 'path';
 import * as url from 'url';
-import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
+import { Certificate, CertificateValidation } from "aws-cdk-lib/aws-certificatemanager";
 
 //@ts-ignore
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
@@ -64,6 +64,13 @@ export function services({ stack, app }: StackContext) {
     }
   )
 
+  const zone = HostedZone.fromLookup(
+    stack,
+    app.logicalPrefixedName('hz'),
+    {
+      domainName: "nameofthemist.com"
+    }
+  )
 
   const site = new StaticSite(
     stack,
@@ -71,8 +78,8 @@ export function services({ stack, app }: StackContext) {
     {
       path: "frontend",
       customDomain: {
-        domainName: `nameofthemist.com`,
-        domainAlias: `www.nameofthemist.com`,
+        domainName: `www.mtg.nameofthemist.com`,
+        domainAlias: `mtg.nameofthemist.com`,
         hostedZone: `nameofthemist.com`
       },
       cdk: {
@@ -81,6 +88,19 @@ export function services({ stack, app }: StackContext) {
       buildOutput: 'dist'
     }
   );
+
+  // const siteRecord = new ARecord(
+  //   stack,
+  //   app.logicalPrefixedName('a-record'),
+  //   {
+  //     recordName: `mtg.nameofthemist.com`,
+  //     zone: zone,
+  //     // target: aws_route53.RecordTarget.fromAlias(new aws_route53_targets.BucketWebsiteTarget(frontendBucket.deployedBucket))
+  //     target: aws_route53.RecordTarget.fromAlias(
+  //       new aws_route53_targets.CloudFrontTarget(site)
+  //     )
+  //   }
+  // )
 
 
 
