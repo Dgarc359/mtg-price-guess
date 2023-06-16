@@ -2,7 +2,7 @@ Guess which card is more expensive out of the two given Magic the Gathering Card
 
 Deploy your own version to AWS with `yarn deploy`
 
-Website Link TBD
+mtg.nameofthemist.com
 
 Current features:
 * Jest testing
