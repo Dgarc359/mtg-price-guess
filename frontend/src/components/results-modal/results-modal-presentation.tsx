@@ -74,9 +74,9 @@ export const ResultsModal = (props: IResultsModal): JSX.Element => {
                 <Grid item xs={12}/>
                 <Grid item xs={12} >
                 <Typography variant="h2" sx={{textAlign: "center"}} >
-                    {(playerWon ? "You won!" : "You lost!")}
+                    {(playerWon ? "Correct!" : "Incorrect!")}
                 </Typography>
-                
+
                 </Grid>
                 <Grid item xs={12} sx={{textAlign: "center"}}>
                 <Typography variant="body1">
@@ -106,6 +106,6 @@ export const ResultsModal = (props: IResultsModal): JSX.Element => {
         //         "rounded-lg"
         //     ])}
         // >
-        
+
     )
 }

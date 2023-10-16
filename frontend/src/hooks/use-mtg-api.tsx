@@ -7,9 +7,17 @@ export const useMtgApi = (refreshArr: boolean[]) => {
   const [response, setResponse] = React.useState<Card | undefined>();
 
   React.useEffect(() => {
+    let isCurrent = true
     Axios.get("https://api.scryfall.com/cards/random")
-      .then((res) => setResponse(res.data))
+      .then((res) => {
+          if(isCurrent){
+            setResponse(res.data)
+          }
+        })
       .catch(err => alert(err))
+    return () => {
+        isCurrent = false
+    }
   }, refreshArr);
 
   return [response, setResponse] as const
