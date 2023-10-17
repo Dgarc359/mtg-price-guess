@@ -26,7 +26,7 @@ export const CardView = (props: ICard) => {
       ])}
     >
       <IconButton>
-      <Paper 
+      <Paper
         sx={{
           p:2,
           margin: "auto",
@@ -51,14 +51,16 @@ export const CardView = (props: ICard) => {
                 id={props.cardData?.name}
                 src={props.cardData?.image_uris?.png}
                 alt=""
+                width={400}
+                height={500}
                 className={cn([
                   // "hover:cursor-pointer",
                   "max-sm:w-[90%]",
                   "md:w-[70%] md:m-auto",
                 ])}
               /> :
-              <Skeleton 
-                variant="rounded" 
+              <Skeleton
+                variant="rounded"
                 // height={400}
                 sx={{
                   margin: "auto",
@@ -88,7 +90,7 @@ export const CardView = (props: ICard) => {
                 }}
               />
             }
-         
+
           </Grid>
           <Grid item md={12} xs={8}>
             {
@@ -98,9 +100,9 @@ export const CardView = (props: ICard) => {
                 {props.cardData?.name}
                 {/* Quick Stats */}
               </Typography>
-              : <Skeleton 
-                variant="text" 
-                // width={300} 
+              : <Skeleton
+                variant="text"
+                // width={300}
                 // height={40}
 
                 sx={{
@@ -137,7 +139,7 @@ export const CardView = (props: ICard) => {
                 }}
               />
             }
-            
+
             {
               timePassed ?
               <Typography variant="body2" color={"text.secondary"} sx={{textAlign: {sm: "left", md: "center"}}}>
