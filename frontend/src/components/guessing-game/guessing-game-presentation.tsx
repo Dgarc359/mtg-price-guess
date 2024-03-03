@@ -3,7 +3,6 @@ import { cn } from "../../lib/utils";
 import { CardView } from "../card/card-presentation";
 import { ResultsModal } from "../results-modal";
 import {Typography} from '@mui/material';
-import { LoadingCard } from "../card/loading-card-presentation";
 
 interface Props {
   firstCard: Card | undefined

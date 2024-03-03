@@ -1,3 +1,3 @@
 
 
-export const ChooseGameState = () => <></>
+export const ChooseGameState = () => <>Make your Choice</>
