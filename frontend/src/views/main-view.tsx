@@ -1,5 +1,5 @@
-import { GuessingGame } from "../components/guessing-game"
+import { StateOrchestrator } from "../components/state-orchestrator"
 
 export const MainView = () => {
-  return <GuessingGame />
+  return <StateOrchestrator/>
 }

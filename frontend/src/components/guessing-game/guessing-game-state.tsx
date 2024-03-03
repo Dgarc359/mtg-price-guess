@@ -1,13 +1,17 @@
 import React from "react";
-import { useMtgApi } from "../../hooks/use-mtg-api";
 import { Card } from "../../lib/types";
 import { GuessingGamePresentation } from "./guessing-game-presentation"
+import { GameChoice } from "../state-orchestrator";
+import { useMtgApi } from "../../hooks/use-mtg-api";
 
 /**
  * Takes care of API calls and setting state of cards to be compared
  * @returns 
  */
-export const GuessingGameState = () => {
+export const GuessingGameState = (props: {
+  gameChoice: GameChoice 
+}
+) => {
   
   const [winningCard, setWinningCard] = React.useState<Card | undefined>();
   const [playerPick, setPlayerPick] = React.useState<string>();
@@ -16,7 +20,6 @@ export const GuessingGameState = () => {
   const [refreshCards, setRefreshCards] = React.useState<boolean>(false);
   const [refreshFirstCard, setRefreshFirstCard] = React.useState<boolean>(false);
   const [refreshSecondCard, setRefreshSecondCard] = React.useState<boolean>(false);
-
 
   const [firstCard, setFirstCard] = useMtgApi([refreshCards, refreshFirstCard]);
   const [secondCard, setSecondCard] = useMtgApi([refreshCards, refreshSecondCard]);
