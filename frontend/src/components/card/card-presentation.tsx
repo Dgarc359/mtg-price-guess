@@ -17,6 +17,7 @@ export const CardView = (props: ICard) => {
     onClickDisabled,
     timePassed,
   } = props;
+  console.log(props)
 
   return (
     <div
@@ -25,7 +26,9 @@ export const CardView = (props: ICard) => {
         "p-4 m-4"
       ])}
     >
-      <IconButton>
+      <IconButton
+        onClick={onClickDisabled ? imageOnClick : () => {}}
+      >
       <Paper
         sx={{
           p:2,
@@ -39,7 +42,7 @@ export const CardView = (props: ICard) => {
           },
           cursor: onClickDisabled && timePassed ? "pointer" : "default"
         }}
-        onClick={onClickDisabled ? imageOnClick : () => {}}
+      // onClick={onClickDisabled ? imageOnClick : () => {}}
         id={props.cardData?.name}
       >
         <Grid container spacing={2}>

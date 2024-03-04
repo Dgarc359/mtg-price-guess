@@ -14,12 +14,9 @@ export const GuessingGameState = () => {
   const [modalVisibility, setModalVisible] = React.useState<boolean>(false);
 
   const [refreshCards, setRefreshCards] = React.useState<boolean>(false);
-  const [refreshFirstCard, setRefreshFirstCard] = React.useState<boolean>(false);
-  const [refreshSecondCard, setRefreshSecondCard] = React.useState<boolean>(false);
 
-
-  const [firstCard, setFirstCard] = useMtgApi([refreshCards, refreshFirstCard]);
-  const [secondCard, setSecondCard] = useMtgApi([refreshCards, refreshSecondCard]);
+  const firstCardResult = useMtgApi("first-card");
+  const secondCardResult = useMtgApi("second-card");
 
   const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -41,24 +38,49 @@ export const GuessingGameState = () => {
     else setPlayerStreak(0);
   }
 
-  React.useEffect(() => {
-    [{state: firstCard, refresh: setRefreshFirstCard}, {state: secondCard, refresh: setRefreshSecondCard}].forEach((card) => {
-      if(!card.state?.prices.usd) card.refresh((state) => !state);
-    })
-    waitAndSetTimePassed();
-    setWinningCard(Number(firstCard?.prices.usd) > Number(secondCard?.prices.usd) ? firstCard : secondCard)
-  }, [firstCard, secondCard]);
-
-
   const onPlayerChoiceClick = (e: any) => {
     console.log("player choice", e.currentTarget.id, "winning card", winningCard?.name);
     setPlayerPick(e.currentTarget.id);
     setModalVisible(true);
   }
 
+  if (firstCardResult.isError) {
+    firstCardResult.refetch()
+  } else if (secondCardResult.isError) {
+    secondCardResult.refetch()
+  }
+
+  React.useEffect(() => {
+    let p1, p2 = undefined;
+    if(!firstCardResult.isPending && firstCardResult.data) {
+
+      let fc: Card = firstCardResult.data;
+      if(fc !== undefined && fc.prices.usd === undefined) {
+        firstCardResult.refetch()
+      } else {
+        p1 = fc.prices.usd
+      }
+    }
+    if(!secondCardResult.isPending && secondCardResult.data) {
+      let sc: Card = secondCardResult.data;
+      if(sc !== undefined && sc.prices.usd === undefined) {
+        secondCardResult.refetch()
+      } else {
+        p2 = sc.prices.usd
+      }
+    }
+    
+    waitAndSetTimePassed();
+    if(p1 && p2) {
+    setWinningCard(
+      Number(p1) < Number(p2) ? firstCardResult.data : secondCardResult.data
+    )
+    }
+  }, []);
+
   return (<GuessingGamePresentation 
-    firstCard={firstCard} 
-    secondCard={secondCard} 
+    firstCard={firstCardResult.data} 
+    secondCard={secondCardResult.data} 
     onPlayerChoiceClick={onPlayerChoiceClick} 
     modalVisible={modalVisibility}
     onModalCloseClick={modalOnClick}
