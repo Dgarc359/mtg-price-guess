@@ -7,7 +7,7 @@ import React from "react"
 
 export const StateOrchestratorState = () => {
 
-  const [gameChoice, setGameChoice] = React.useState<GameChoice | undefined>("mtg");
+  const [gameChoice, setGameChoice] = React.useState<GameChoice | undefined>();
 
   if (gameChoice === undefined) { return (<ChooseGame/>) }
 

@@ -1,3 +1,4 @@
+import { ChooseGamePresentation } from "./choose-game-presentation";
 
 
-export const ChooseGameState = () => <>Make your Choice</>
+export const ChooseGameState = () => <ChooseGamePresentation/>
