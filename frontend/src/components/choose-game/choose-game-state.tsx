@@ -1,20 +1,21 @@
 import { gameChoices } from "../state-orchestrator";
 import { ChooseGamePresentation } from "./choose-game-presentation";
+interface Props {
+    setGameChoice: React.Dispatch<React.SetStateAction<"Pokemon" | "Magic The Gathering" | undefined>>
+    
+}
+export const ChooseGameState = (props:Props) => {
 
-export const ChooseGameState = (props:any) => {
-    function redirectChoice(choice:string){
-        props.setGameChoice(gameChoices[0])
+    type ev = {
+        target: {
+            id: any
+        }
     }
-    const onPlayerChoiceClick = (e: any) => {
-        console.log(gameChoices)
-        
-        
+    
+    const onPlayerChoiceClick = (e: ev) => {
+       console.log(gameChoices,e.target.id)
+       props.setGameChoice(e.target.id)
     }
-    return(
-        
-        <ChooseGamePresentation
-        onPlayerChoiceClick = {onPlayerChoiceClick}
-        redirectChoice = {redirectChoice}
-        />
-    )
+
+    return(<ChooseGamePresentation onClick = {onPlayerChoiceClick}/>)
 }

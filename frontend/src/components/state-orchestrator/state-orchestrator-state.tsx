@@ -9,7 +9,7 @@ export const StateOrchestratorState = () => {
   
   const [gameChoice, setGameChoice] = React.useState<GameChoice | undefined>();
 
-  if (gameChoice === undefined) { return (<ChooseGame/>) }
+  if (gameChoice === undefined) { return (<ChooseGame setGameChoice = {setGameChoice}/>) }
   
 
   return (<GuessingGame gameChoice={gameChoice}/>)
