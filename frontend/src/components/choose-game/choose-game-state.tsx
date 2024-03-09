@@ -5,7 +5,7 @@ interface Props {
     
 }
 export const ChooseGameState = (props:Props) => {
-
+    
     type ev = {
         target: {
             id: any

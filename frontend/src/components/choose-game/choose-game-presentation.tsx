@@ -31,7 +31,7 @@ const GameButton = (props: CardChoice) => {
 
 const Logo = () => {
     return (
-        <div id="logo-container" className="flex bg-slate-300 justify-center p-8">
+        <div id="logo-container" className="flex justify-center p-8">
             <div id="logo" className="rounded-full bg-black ">
                 <img src="mtg-guessing-game-logo.svg" className="w-24 h-24 rounded-full" />
             </div>
@@ -46,10 +46,15 @@ export const ChooseGamePresentation = (props: Props) => {
     }=props;
     return (
 
-        <div id="background" className="h-full bg-slate-300" >
+        <div id="background" className="h-full bg-slate-800 text-white" >
+            <div id="toggle-night-container" className="flex justify-end p-7 ">
+                <button className="rounded-full bg-stone-50 w-10 h-10 flex justify-start hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-400/50">
+                    {/* <div className="rounded-full bg-slate-800 w-9 h-9 hover:bg-amber-400"/> */}
+                    </button>
+            </div>
             <Logo />
-            <div id="header" className="pb-5 flex justify-center sm: text-4xl">
-                Choose a TCG
+            <div id="header" className="pb-5 flex justify-center sm: text-4xl ">
+                <strong>Choose a TCG</strong>
             </div>
             <p id="description" className="pb-5 px-5 sm:text-center">After choosing one of the TCG below,
                 you will be redirected to choose between 2 random cards in that TCG. Pick the card you think
