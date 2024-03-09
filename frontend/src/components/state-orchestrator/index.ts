@@ -1,2 +1,3 @@
 export {StateOrchestratorState as StateOrchestrator} from "./state-orchestrator-state";
-export type GameChoice = "pok" | "mtg"
+export const gameChoices = ["Pokemon", "Magic The Gathering"] as const;
+export type GameChoice = typeof gameChoices[number]
