@@ -11,30 +11,30 @@ function getImageUrl(name:string) {
   }
 
 const GameButton = (props:{choice:string, cardName:string}) => {
-    
+
     const cardBack = getImageUrl(props.cardName)
-    
-    
+
+
     return(
-        
+
     <div id = {props.cardName} className = "shadow-lg" >
         <button><img src = {cardBack} alt = "Card Back" className = "w-45 h-64 transition duration-300 ease-in-out hover:scale-110 " /></button>
         </div>
-        
+
     )
 }
 const Logo = () => {
     return(
     <div id="logo-container" className="flex bg-slate-300 justify-center p-8">
     <div id="logo" className="rounded-full bg-black ">
-        <img src = "../../public/mtg-guessing-game-logo.svg" className = "w-24 h-24 rounded-full"/>
+        <img src = "mtg-guessing-game-logo.svg" className = "w-24 h-24 rounded-full"/>
     </div>
     </div>)
 }
 export const ChooseGamePresentation = (props: any) => {
-    
+
     return (
-        
+
         <div id ="background" className="h-full bg-slate-300" >
             <Logo/>
             <div id="header" className="pb-5 flex justify-center sm: text-4xl">
@@ -50,6 +50,6 @@ export const ChooseGamePresentation = (props: any) => {
                     })}
                 </div>
             </div>
-       
+
     )
 }
