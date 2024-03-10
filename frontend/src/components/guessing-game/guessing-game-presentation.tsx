@@ -12,7 +12,6 @@ interface Props {
   onModalCloseClick: (e: any) => any
   modalVisible: boolean,
   playerChoice: string | undefined
-  winningCard: Card | undefined
   playerStreak: number
   timePassed: boolean
 }
@@ -30,10 +29,12 @@ export const GuessingGamePresentation = (props: Props) => {
     modalVisible,
     onModalCloseClick,
     playerChoice,
-    winningCard,
     playerStreak,
     timePassed,
   } = props;
+  const winningCard = Number(firstCard?.prices.usd) > Number(secondCard?.prices.usd)
+    ? firstCard
+    : secondCard;
 
   return (
     <>
@@ -45,7 +46,6 @@ export const GuessingGamePresentation = (props: Props) => {
       }
       >
         <div className={cn([
-          // "flex justify-evenly w-full"
           modalVisible ? "blur-md" : "",
           "sm:flex-row",
           "md:flex md:justify-evenly w-full"
@@ -59,9 +59,6 @@ export const GuessingGamePresentation = (props: Props) => {
           >
             <Typography variant="h4" sx={{
               textAlign:"center", 
-              paddingRight: {
-                // sm: "1rem",
-              }
             }}>
               Current Streak
             </Typography>
