@@ -97,7 +97,7 @@ export const CardView = (props: ICard) => {
             {
               timePassed ?
               <Typography variant="body2" color={"text.secondary"} sx={{textAlign: {sm: "left", md: "center"}}}>
-              {props.cardData?.legalities.modern === "legal" ? "Legal in Modern" : "Illegal in Modern"}
+              {props.cardData?.legalities.modern === "legal" ? "Currently Legal" : "Currently Illegal"}
               </Typography> :
               <Skeleton
                 variant="text"

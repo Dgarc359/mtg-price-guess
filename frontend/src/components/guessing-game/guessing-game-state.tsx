@@ -7,18 +7,23 @@ import { createCommonCard } from "../../lib/utils";
 import { useGetRandomCardName } from "../../hooks/use-get-random-card-names";
 
 
+interface Props {
+  gameChoice: GameChoice, cardsToCompare: [string, string],
+  reloadCallback?: () => void,
+}
+
 /**
  * Takes care of API calls and setting state of cards to be compared
  * @returns
  */
-export const GuessingGameState = (props: { gameChoice: GameChoice, cardsToCompare: [string, string] }) => {
-  const { gameChoice, cardsToCompare } = props;
+export const GuessingGameState = (props: Props) => {
+  const { gameChoice, cardsToCompare, reloadCallback } = props;
 
   const [playerPick, setPlayerPick] = React.useState<string>();
   const [modalVisibility, setModalVisible] = React.useState<boolean>(false);
 
-  const firstCardResult = useTcgApi(gameChoice, "first-card", cardsToCompare[0]);
-  const secondCardResult = useTcgApi(gameChoice, "second-card", cardsToCompare[1]);
+  const firstCardResult = useTcgApi(gameChoice, `first-card-${cardsToCompare}`, cardsToCompare[0]);
+  const secondCardResult = useTcgApi(gameChoice, `second-card-${cardsToCompare}`, cardsToCompare[1]);
 
   const wait = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -35,6 +40,9 @@ export const GuessingGameState = (props: { gameChoice: GameChoice, cardsToCompar
 
   const modalOnClick = (isCorrect: boolean) => {
     setModalVisible(false);
+    if(reloadCallback) {
+      reloadCallback();
+    }
     waitAndSetTimePassed();
     [firstCardResult, secondCardResult].forEach((card) => card.refetch());
     if (isCorrect) setPlayerStreak((state) => (state += 1));

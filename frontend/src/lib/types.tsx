@@ -37,7 +37,7 @@ export type PokemonCard = {
     small: string,
     large: string,
   },
-  cardmarket: {
+  cardmarket?: {
     prices: {
       averageSellPrice: number
     }

@@ -17,5 +17,9 @@ export const usePokemonApi = (fetchKey: string, cardToFetch: string) => {
     result.refetch();
   };
 
+  if(result && result.data && !result.data.cardmarket) {
+    result.refetch()
+  }
+
   return result;
 }
