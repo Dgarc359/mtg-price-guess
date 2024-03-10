@@ -3,11 +3,11 @@
 // import TestRenderer from 'react-test-renderer';
 import * as renderer from 'react-test-renderer';
 import {CardView} from '../card-presentation';
-import { Card } from '../../../lib/types';
+import { MtgCard } from '../../../lib/types';
 import {test, expect} from 'vitest';
 
     test("tests snapshot", () => {
-        const cardData: Card = {
+        const cardData: MtgCard = {
             name: "test card",
             image_uris: {
                 png: "png url",

@@ -1,6 +1,4 @@
 import { GameChoice, gameChoices } from "."
-import { useMtgApi } from "../../hooks/use-mtg-api"
-import { Card } from "../../lib/types"
 import { ChooseGame } from "../choose-game"
 import { GuessingGame } from "../guessing-game"
 import React from "react"
