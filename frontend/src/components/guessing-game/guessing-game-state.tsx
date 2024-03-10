@@ -1,25 +1,27 @@
 import React from "react";
-import { MtgCard } from "../../lib/types";
-import { GuessingGamePresentation } from "./guessing-game-presentation"
+import { CommonCard, MtgCard, PokemonCard } from "../../lib/types";
+import { GuessingGamePresentation } from "./guessing-game-presentation";
 import { GameChoice } from "../state-orchestrator";
-import { useMtgApi } from "../../hooks/use-mtg-api";
+import { useTcgApi } from "../../hooks/use-tcg-api";
+import { createCommonCard } from "../../lib/utils";
+import { useGetRandomCardName } from "../../hooks/use-get-random-card-names";
+
 
 /**
  * Takes care of API calls and setting state of cards to be compared
- * @returns 
+ * @returns
  */
-export const GuessingGameState = (props: {
-  gameChoice: GameChoice 
-}
-) => {
-  
+export const GuessingGameState = (props: { gameChoice: GameChoice, cardsToCompare: [string, string] }) => {
+  const { gameChoice, cardsToCompare } = props;
+
   const [playerPick, setPlayerPick] = React.useState<string>();
   const [modalVisibility, setModalVisible] = React.useState<boolean>(false);
 
-  const firstCardResult = useMtgApi("first-card");
-  const secondCardResult = useMtgApi("second-card");
+  const firstCardResult = useTcgApi(gameChoice, "first-card", cardsToCompare[0]);
+  const secondCardResult = useTcgApi(gameChoice, "second-card", cardsToCompare[1]);
 
-  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
 
   const [timePassed, setTimePassed] = React.useState<boolean>(false);
 
@@ -34,28 +36,30 @@ export const GuessingGameState = (props: {
   const modalOnClick = (isCorrect: boolean) => {
     setModalVisible(false);
     waitAndSetTimePassed();
-    [firstCardResult, secondCardResult].forEach((card) => card.refetch())
-    if(isCorrect) setPlayerStreak((state) => state += 1);
+    [firstCardResult, secondCardResult].forEach((card) => card.refetch());
+    if (isCorrect) setPlayerStreak((state) => (state += 1));
     else setPlayerStreak(0);
-  }
+  };
 
   const onPlayerChoiceClick = (e: any) => {
     setPlayerPick(e.currentTarget.id);
     setModalVisible(true);
-  }
+  };
 
-  React.useEffect(()=>{
-    waitAndSetTimePassed()
-  }, [])
+  React.useEffect(() => {
+    waitAndSetTimePassed();
+  }, []);
 
-  return (<GuessingGamePresentation 
-    firstCard={firstCardResult.data} 
-    secondCard={secondCardResult.data} 
-    onPlayerChoiceClick={onPlayerChoiceClick} 
-    modalVisible={modalVisibility}
-    onModalCloseClick={modalOnClick}
-    playerChoice={playerPick}
-    playerStreak={playerStreak}
-    timePassed={timePassed}
-    />)
-}
+  return (
+    <GuessingGamePresentation
+      firstCard={createCommonCard(gameChoice, firstCardResult.data)}
+      secondCard={createCommonCard(gameChoice, secondCardResult.data)}
+      onPlayerChoiceClick={onPlayerChoiceClick}
+      modalVisible={modalVisibility}
+      onModalCloseClick={modalOnClick}
+      playerChoice={playerPick}
+      playerStreak={playerStreak}
+      timePassed={timePassed}
+    />
+  );
+};

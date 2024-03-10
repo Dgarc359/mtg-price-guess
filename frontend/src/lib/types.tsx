@@ -20,7 +20,7 @@ export type CommonCard = {
     png: string,
     art_crop: string,
   },
-  oracle_text: string,
+  // oracle_text: string,
   prices: {
     usd: string | null,
     usdFoil: string | null
@@ -31,4 +31,17 @@ export type CommonCard = {
   set_name: string,
 }
 
-export type PokemonCard = {}
+export type PokemonCard = {
+  name: string,
+  images: {
+    small: string,
+    large: string,
+  },
+  cardmarket: {
+    prices: {
+      averageSellPrice: number
+    }
+  },
+  legalities: { unlimited: string },
+  set: { name: string }
+}

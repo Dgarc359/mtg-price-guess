@@ -5,16 +5,12 @@ interface Props {
     
 }
 export const ChooseGameState = (props:Props) => {
-
     type ev = {
-        target: {
-            id: any
-        }
+        target: HTMLElement
     }
     
     const onPlayerChoiceClick = (e: ev) => {
-       console.log(gameChoices,e.target.id)
-       props.setGameChoice(e.target.id)
+       props.setGameChoice(e.target.getAttribute('id') as any)
     }
 
     return(<ChooseGamePresentation onClick = {onPlayerChoiceClick}/>)

@@ -1,10 +1,9 @@
 import { Card as MuiCard, CardMedia, CardContent, Typography, CardActionArea, Paper, Grid, IconButton, Skeleton } from "@mui/material";
-import React from "react";
-import { MtgCard } from "../../lib/types";
+import { CommonCard } from "../../lib/types";
 import { cn } from "../../lib/utils";
 
 interface ICard {
-  cardData: MtgCard | undefined;
+  cardData: CommonCard | undefined;
   imageOnClick?: (event?: unknown) => void;
   onClickDisabled: boolean;
   timePassed: boolean;

@@ -4,9 +4,7 @@ import { cn } from "../../lib/utils";
 import { Component } from "react";
 
 function getImageUrl(name: string) {
-    console.log(name)
     let c = new URL(`../../assets/img/${name}`, import.meta.url).href
-    console.log(c)
     return c
 }
 interface CardChoice{
@@ -18,11 +16,10 @@ const GameButton = (props: CardChoice) => {
 
     const cardBack = getImageUrl(props.cardName)
 
-
     return (
         <div  className="" >
             <button id={props.choice} onClick = {props.onClick}>
-                <img src={cardBack} alt="Card Back" className="w-45 h-64 transition duration-300 ease-in-out hover:scale-110 "  />
+                <img id={props.choice} src={cardBack} alt="Card Back" className="w-45 h-64 transition duration-300 ease-in-out hover:scale-110 "  />
             </button>
         </div>
 

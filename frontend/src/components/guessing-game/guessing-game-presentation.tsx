@@ -1,12 +1,12 @@
-import { MtgCard } from "../../lib/types";
+import { CommonCard, MtgCard } from "../../lib/types";
 import { cn } from "../../lib/utils";
 import { CardView } from "../card/card-presentation";
 import { ResultsModal } from "../results-modal";
 import {Typography} from '@mui/material';
 
 interface Props {
-  firstCard: MtgCard | undefined
-  secondCard: MtgCard | undefined
+  firstCard: CommonCard | undefined
+  secondCard: CommonCard | undefined
   onPlayerChoiceClick: (e: any) => any
   onModalCloseClick: (e: any) => any
   modalVisible: boolean,
