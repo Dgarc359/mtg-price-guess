@@ -1,4 +1,4 @@
-import { Card } from "../../lib/types";
+import { CommonCard, MtgCard } from "../../lib/types";
 import { cn } from "../../lib/utils";
 import { Card as MuiCard, CardMedia, CardContent, Typography, CardActionArea, Paper, Grid, IconButton, Box } from "@mui/material";
 
@@ -7,9 +7,9 @@ interface IResultsModal {
     visible: boolean;
     onModalCloseClick: (arg0: boolean) => void;
     playerChoice?: string;
-    winningCard: Card | undefined;
-    firstCard: Card | undefined;
-    secondCard: Card | undefined;
+    winningCard: CommonCard | undefined;
+    firstCard: CommonCard | undefined;
+    secondCard: CommonCard | undefined;
 }
 
 export const ResultsModal = (props: IResultsModal): JSX.Element => {
