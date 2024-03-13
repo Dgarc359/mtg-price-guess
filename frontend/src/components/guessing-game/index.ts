@@ -1,1 +1,1 @@
-export {GuessingGame} from './guessing-game';
+export {GuessingGameState as GuessingGame} from './guessing-game-state';

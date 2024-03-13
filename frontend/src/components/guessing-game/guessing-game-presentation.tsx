@@ -1,18 +1,16 @@
-import { Card } from "../../lib/types";
+import { CommonCard, MtgCard } from "../../lib/types";
 import { cn } from "../../lib/utils";
 import { CardView } from "../card/card-presentation";
 import { ResultsModal } from "../results-modal";
 import {Typography} from '@mui/material';
-import { LoadingCard } from "../card/loading-card-presentation";
 
 interface Props {
-  firstCard: Card | undefined
-  secondCard: Card | undefined
+  firstCard: CommonCard | undefined
+  secondCard: CommonCard | undefined
   onPlayerChoiceClick: (e: any) => any
   onModalCloseClick: (e: any) => any
   modalVisible: boolean,
   playerChoice: string | undefined
-  winningCard: Card | undefined
   playerStreak: number
   timePassed: boolean
 }
@@ -30,10 +28,12 @@ export const GuessingGamePresentation = (props: Props) => {
     modalVisible,
     onModalCloseClick,
     playerChoice,
-    winningCard,
     playerStreak,
     timePassed,
   } = props;
+  const winningCard = Number(firstCard?.prices.usd) > Number(secondCard?.prices.usd)
+    ? firstCard
+    : secondCard;
 
   return (
     <>
@@ -45,7 +45,6 @@ export const GuessingGamePresentation = (props: Props) => {
       }
       >
         <div className={cn([
-          // "flex justify-evenly w-full"
           modalVisible ? "blur-md" : "",
           "sm:flex-row",
           "md:flex md:justify-evenly w-full"
@@ -59,9 +58,6 @@ export const GuessingGamePresentation = (props: Props) => {
           >
             <Typography variant="h4" sx={{
               textAlign:"center", 
-              paddingRight: {
-                // sm: "1rem",
-              }
             }}>
               Current Streak
             </Typography>

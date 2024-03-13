@@ -1,5 +1,8 @@
-import { GuessingGame } from "../components/guessing-game"
+import { StateOrchestrator } from "../components/state-orchestrator"
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 export const MainView = () => {
-  return <GuessingGame />
+  let qc = new QueryClient();
+  return <QueryClientProvider client={qc}><StateOrchestrator/></QueryClientProvider>
 }
